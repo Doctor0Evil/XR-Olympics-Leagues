@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "repo": "Cybercore-Brain",
+  "particles": [
+    "cybercore-brain.cyberrank.matrix.v1",
+    "cyberank.vector.profile.v1"
+  ],
+  "jurisdiction_tags": ["US", "US-AZ", "US-AZ-Maricopa-Phoenix"]
+}
