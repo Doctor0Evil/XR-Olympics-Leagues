@@ -1,0 +1,9 @@
+particle ci.profile.<repo>.v1 {
+  kind: governance.ci.binding
+  binds: ci.donutloop.profile.v1
+
+  exports {
+    particles/*
+    metrics/*
+  }
+}
