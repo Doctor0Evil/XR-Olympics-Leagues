@@ -1,0 +1,48 @@
+name: cybercore-donutloop-ci
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  donutloop:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout (signed)
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Ingest — ALN + manifest
+      run: |
+        aln-spec-check particles/
+        aln-link-check particles/ \
+          --require ci.donutloop.profile.v1 \
+          --require ci.workline.zerotrust.v1
+
+    - name: Validate — Rust
+      run: |
+        cargo fmt --all -- --check
+        cargo clippy --all-targets --all-features -- -D warnings
+        cargo test --all
+
+    - name: Transform — invariants
+      run: |
+        cargo kani --workspace || exit 1
+        ./ci/gen_score_manifest.sh > ci/provenance.manifest.json
+
+    - name: Index — particle export
+      run: |
+        ./ci/gen_particle_manifest.sh > particles/export.manifest.json
+
+    - name: Release gate
+      if: github.ref == 'refs/heads/main'
+      run: |
+        ./ci/release_guard.sh \
+          --require-policy policy.jurisdiction.us-az-maricopa-phoenix.v1
+
+    - name: Monitor schema
+      run: |
+        ./ci/verify_metrics_schema.sh
