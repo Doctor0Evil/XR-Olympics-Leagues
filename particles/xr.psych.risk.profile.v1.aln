@@ -1,0 +1,35 @@
+# repo: XR-Sport-Core
+# path: particles/xr.psych.risk.profile.v1.aln
+
+particle xr.psych.risk.profile.v1
+  kind           Envelope
+  maintainedby   XR-Sport-Core
+  sourcerepo     https://github.com/Doctor0Evil/XR-Sport-Core
+  specpath       particles/xr.psych.risk.profile.v1.aln
+  jurisdictions  multi-jurisdiction, us-az-maricopa-phoenix, pqc
+
+  description """
+  Psych-risk envelope for XR sport, horror, and governance loops: caps startle
+  frequency, loudness, flash rate, narrative tone, and prohibited content
+  types, with explicit constraints for vulnerable users and opt-in modes.
+  """
+
+  fields
+    id                    string
+    citizen_id            string
+    startle_frequency_max float
+    max_loudness_db       float
+    flash_rate_hz_max     float
+    narrative_tone_tag    string
+    prohibited_content    list
+    vulnerable_profile    bool
+    opt_in_high_intensity bool
+
+  cyberlinks
+    target  neuro.cognitive.load.envelope.v1
+    relation constrained-by
+    weighthint 0.95
+
+    target  xr.sport.loop.v1
+    relation governs
+    weighthint 0.94

@@ -1,0 +1,41 @@
+# repo: XR-Sport-Core
+# path: particles/xr.sport.loop.v1.aln
+
+particle xr.sport.loop.v1
+  kind           Loop
+  maintainedby   XR-Sport-Core
+  sourcerepo     https://github.com/Doctor0Evil/XR-Sport-Core
+  specpath       particles/xr.sport.loop.v1.aln
+  jurisdictions  multi-jurisdiction, us-az-maricopa-phoenix, pqc
+
+  description """
+  XR sport / movement loop for augmented and non-augmented citizens: outdoor
+  quests, circuits, and social missions with capped daily load, cooperative
+  goals, and CyberMode-aware difficulty scaling.
+  """
+
+  fields
+    id                    string
+    citizen_id            string
+    class                 enum    natural, assistive, fully-augmented
+    route_topology_id     string  # city.xr.route.topology.v1
+    daily_load_cap_score  float
+    streak_cap_days       u32
+    cooperative_goal_flag bool
+
+    fatigue_index_target  float
+    mental_health_target  float
+    addiction_risk_cap    float
+
+  cyberlinks
+    target  citizen.cybermode.state.v1
+    relation constrained-by
+    weighthint 0.95
+
+    target  bio.safety.envelope.citizen.v1
+    relation bounded-by
+    weighthint 0.96
+
+    target  xr.psych.risk.profile.v1
+    relation governed-by
+    weighthint 0.94

@@ -1,0 +1,108 @@
+particle xr.motivation.pattern.v1 {
+  meta {
+    id: "xr.motivation.pattern.v1.core"
+    name: "XR Motivation Pattern"
+    kind: "xr.motivation.pattern"
+    version: "v1"
+    sourcerepo: "XR-Sport-Core"
+    jurisdictiontags: [
+      "us",
+      "us-az",
+      "us-az-maricopa",
+      "us-az-maricopa-phoenix"
+    ]
+    cyberlinks: [
+      "greatperplexity.core.v1",
+      "neuro.cognitive.load.envelope.v1",
+      "cybernetic.energy.profile.v1",
+      "bioaugment.interface.telemetry.v1",
+      "nanoswarm.metabolism.stage.k",
+      "citizen.cybermode.state.v1",
+      "augmented.citizen.profile.v1",
+      "rehab.loop.addiction.v1",
+      "health.benefit.funnel.v1",
+      "xr.sport.loop.v1",
+      "policy.jurisdiction.us-az-maricopa-phoenix.v1",
+      "ci.workline.zerotrust.v1"
+    ]
+  }
+
+  identity {
+    pattern_id: string
+    citizen_id: string
+    xr_session_id: string
+    grid_node_id: string               // biomech waste-to-energy grid node
+  }
+
+  context {
+    window_start_utc: string
+    window_end_utc: string
+    aggregation_span_hours: f32
+    scenario_label: string             // e.g. "waste-to-energy-participation"
+    environment_label: string          // "home", "clinic", "arena", "work"
+  }
+
+  engagement_profile {
+    sessions_per_day: f32
+    mean_session_duration_min: f32
+    max_session_duration_min: f32
+    consecutive_days_active: u32
+    break_gap_hours_mean: f32
+  }
+
+  motivation_signals {
+    intrinsic_motivation_index: f32    // 0.0–10.0
+    extrinsic_reward_index: f32        // 0.0–10.0
+    social_pressure_index: f32         // 0.0–10.0
+    stigma_avoidance_index: f32        // 0.0–10.0, use to avoid stigma via participation
+    altruistic_benefit_index: f32      // perceived help to grid/community 0.0–10.0
+  }
+
+  affective_dynamics {
+    pre_session_mood_valence_index: f32 // -1.0 to 1.0
+    post_session_mood_valence_index: f32
+    pre_session_stress_index: f32       // 0.0–10.0
+    post_session_stress_index: f32
+    shame_stigma_index: f32             // 0.0–10.0
+  }
+
+  compulsion_pattern {
+    unplanned_session_ratio: f32        // 0.0–1.0
+    night_time_use_ratio: f32           // 0.0–1.0
+    failed_attempts_to_cut_down_count: u32
+    usage_despite_distress_index: f32   // 0.0–10.0
+  }
+
+  waste_linked_feedback {
+    waste_state_visual_feedback_index: f32   // 0.0–10.0
+    waste_state_somatic_feedback_index: f32  // 0.0–10.0
+    feedback_frequency_per_hour: f32
+    feedback_predictability_index: f32       // 0.0–10.0
+    perceived_feedback_helpfulness_index: f32// 0.0–10.0
+  }
+
+  envelope_alignment {
+    neuro_load_envelope_id: string
+    distance_to_failure_score: f32          // mirrored/linked from neuro envelope
+    band_label: string                      // "safe", "warning", "failure"
+    target_motivation_band_label: string    // "healthy", "elevated-risk", "maladaptive"
+  }
+
+  intervention_hooks {
+    rehab_loop_addiction_id: string
+    recommended_session_cap_minutes_per_day: f32
+    recommended_min_break_minutes_between_sessions: f32
+    requires_clinician_review: bool
+    requires_citizen_consent_refresh: bool
+  }
+
+  audit {
+    pattern_cid: string
+    ingest_node_id: string
+    ingest_pipeline_id: string
+    assessment_instrument_refs: [string]
+    signed_by: string
+    signature_pqc_algo: string
+    signature_payload_hex: string
+  }
+}
